@@ -79,6 +79,37 @@
             user-select: none;
         }
 
+        .design-selector {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #34495e;
+            border-radius: 4px;
+        }
+
+        .design-selector label {
+            color: #ecf0f1;
+            font-size: 14px;
+            font-weight: 500;
+            margin-right: 15px;
+            display: inline-block;
+        }
+
+        .design-selector select {
+            background: #2c3e50;
+            color: #ecf0f1;
+            border: 1px solid #4a5f7f;
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-size: 13px;
+            cursor: pointer;
+            min-width: 150px;
+        }
+
+        .design-selector select:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
         .invoice-container {
             max-width: 900px;
             margin: 0 auto;
@@ -321,6 +352,72 @@
             line-height: 1.5;
         }
 
+        /* Design 1 - Card Grid (Current) - uses default styles above */
+        
+        /* Design 2 - Simple Table Layout */
+        .amount-due-section.design-2 {
+            padding: 0;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .amount-due-section.design-2 .amount-due-content {
+            display: block;
+        }
+
+        .amount-due-section.design-2 .amount-due-grid {
+            display: block;
+            border-collapse: collapse;
+        }
+
+        .amount-due-section.design-2 .amount-due-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            background: white;
+            border: none;
+            border-bottom: 1px solid #f0f0f0;
+            border-radius: 0;
+            margin: 0;
+        }
+
+        .amount-due-section.design-2 .amount-due-item:last-child {
+            border-bottom: none;
+        }
+
+        .amount-due-section.design-2 .amount-due-item-label {
+            font-size: 13px;
+            color: #333;
+            margin-bottom: 0;
+            font-weight: 400;
+        }
+
+        .amount-due-section.design-2 .amount-due-item-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #000;
+        }
+
+        .amount-due-section.design-2 .amount-due-content {
+            padding: 15px;
+        }
+
+        .amount-due-section.design-2 .amount-due-box {
+            margin-top: 15px;
+            width: 100%;
+            max-width: 250px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .amount-due-section.design-2 .amount-due-footer {
+            margin: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e0e0e0;
+        }
+
         /* Bank Details */
         .bank-section {
             margin-top: 40px;
@@ -351,6 +448,13 @@
     <div class="control-panel">
         <div class="control-panel-wrapper">
             <h2>Amount Due Box Configuration</h2>
+            <div class="design-selector">
+                <label for="design-select">Design:</label>
+                <select id="design-select">
+                    <option value="design-1">Design 1 - Card Grid</option>
+                    <option value="design-2">Design 2 - Simple List</option>
+                </select>
+            </div>
             <p>Toggle items to show different configurations for the dev team:</p>
             <div class="control-grid">
             <div class="control-item">
@@ -492,7 +596,7 @@
 
         <!-- Amount Due Box -->
         <h3 class="amount-due-heading">Domestic Reverse Charge: Customer to account for VAT to HMRC</h3>
-        <div class="amount-due-section">
+        <div class="amount-due-section design-1">
             <div class="amount-due-content">
                 <div class="amount-due-grid">
                     <div class="amount-due-item" data-item-id="source-quote">
@@ -554,7 +658,19 @@
         // Control Panel Toggle Functionality
         document.addEventListener('DOMContentLoaded', function() {
             const checkboxes = document.querySelectorAll('.control-panel input[type="checkbox"]');
+            const designSelect = document.getElementById('design-select');
+            const amountDueSection = document.querySelector('.amount-due-section');
             
+            // Design switcher
+            designSelect.addEventListener('change', function() {
+                const selectedDesign = this.value;
+                // Remove all design classes
+                amountDueSection.classList.remove('design-1', 'design-2');
+                // Add selected design class
+                amountDueSection.classList.add(selectedDesign);
+            });
+            
+            // Item visibility toggles
             checkboxes.forEach(checkbox => {
                 checkbox.addEventListener('change', function() {
                     const itemId = this.getAttribute('data-item');
