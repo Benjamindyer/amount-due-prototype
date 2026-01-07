@@ -1127,11 +1127,94 @@
     </div>
 
     <script>
+        // Default colors for each design
+        const defaultColors = {
+            'design-1': { bg: '#dc3545', text: '#ffffff' },
+            'design-2': { bg: '#ffffff', text: '#dc3545' },
+            'design-6': { bg: '#dc3545', text: '#ffffff' },
+            'design-7': { bg: '#dc3545', text: '#ffffff' }
+        };
+
         // Control Panel Toggle Functionality
         document.addEventListener('DOMContentLoaded', function() {
             const checkboxes = document.querySelectorAll('.control-panel input[type="checkbox"]');
             const designSelect = document.getElementById('design-select');
             const amountDueSection = document.querySelector('.amount-due-section');
+            const bgColorInput = document.getElementById('due-box-bg-color');
+            const bgColorText = document.getElementById('due-box-bg-color-text');
+            const textColorInput = document.getElementById('due-box-text-color');
+            const textColorText = document.getElementById('due-box-text-color-text');
+            
+            // Load colors from localStorage or use defaults
+            function loadColors() {
+                const currentDesign = amountDueSection.classList.contains('design-1') ? 'design-1' :
+                                     amountDueSection.classList.contains('design-2') ? 'design-2' :
+                                     amountDueSection.classList.contains('design-6') ? 'design-6' : 'design-7';
+                
+                const storedBg = localStorage.getItem('dueBoxBgColor');
+                const storedText = localStorage.getItem('dueBoxTextColor');
+                
+                const bgColor = storedBg || defaultColors[currentDesign].bg;
+                const textColor = storedText || defaultColors[currentDesign].text;
+                
+                bgColorInput.value = bgColor;
+                bgColorText.value = bgColor;
+                textColorInput.value = textColor;
+                textColorText.value = textColor;
+                
+                applyColors();
+            }
+            
+            // Apply colors to due box
+            function applyColors() {
+                const dueBox = document.querySelector('.amount-due-box');
+                if (dueBox) {
+                    const bgColor = bgColorInput.value;
+                    const textColor = textColorInput.value;
+                    
+                    dueBox.style.backgroundColor = bgColor;
+                    dueBox.style.color = textColor;
+                    
+                    // Apply to all text elements inside
+                    dueBox.querySelectorAll('*').forEach(el => {
+                        el.style.color = textColor;
+                    });
+                    
+                    // For Design 2, handle border color
+                    if (amountDueSection.classList.contains('design-2')) {
+                        dueBox.style.borderColor = textColor;
+                    }
+                    
+                    // Save to localStorage
+                    localStorage.setItem('dueBoxBgColor', bgColor);
+                    localStorage.setItem('dueBoxTextColor', textColor);
+                }
+            }
+            
+            // Color input handlers
+            bgColorInput.addEventListener('input', function() {
+                bgColorText.value = this.value;
+                applyColors();
+            });
+            
+            bgColorText.addEventListener('input', function() {
+                if (/^#[0-9A-F]{6}$/i.test(this.value)) {
+                    bgColorInput.value = this.value;
+                    applyColors();
+                }
+            });
+            
+            textColorInput.addEventListener('input', function() {
+                textColorText.value = this.value;
+                applyColors();
+            });
+            
+            textColorText.addEventListener('input', function() {
+                if (/^#[0-9A-F]{6}$/i.test(this.value)) {
+                    textColorInput.value = this.value;
+                    applyColors();
+                }
+            });
             
             // Design switcher
             designSelect.addEventListener('change', function() {
@@ -1140,6 +1223,10 @@
                 amountDueSection.classList.remove('design-1', 'design-2', 'design-6', 'design-7');
                 // Add selected design class
                 amountDueSection.classList.add(selectedDesign);
+                
+                // Load colors for new design (use stored or default)
+                loadColors();
+                
                 // Update source code if panel is open
                 if (document.getElementById('source-code-panel').classList.contains('active')) {
                     updateSourceCode();
@@ -1165,6 +1252,9 @@
                     }
                 });
             });
+            
+            // Load colors on page load
+            loadColors();
         });
 
         function toggleSourceCode() {
