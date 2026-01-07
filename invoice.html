@@ -130,16 +130,15 @@
         .source-code-panel {
             display: none;
             position: fixed;
-            top: 180px;
+            top: 0;
             left: 0;
             right: 0;
+            bottom: 0;
             z-index: 999;
             background: #2d2d2d;
-            border-radius: 0 0 8px 8px;
             padding: 20px;
-            max-height: 80vh;
             overflow-y: auto;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            box-shadow: none;
         }
 
         .source-code-panel.active {
@@ -147,8 +146,11 @@
         }
 
         .source-code-panel .control-panel-wrapper {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
         .source-code-panel h3 {
@@ -183,6 +185,8 @@
             border-radius: 4px;
             overflow-x: auto;
             margin: 0;
+            flex: 1;
+            min-height: 0;
         }
 
         .source-code-panel code {
@@ -863,11 +867,11 @@
                     <button class="source-tab active" onclick="showSourceTab('html')">HTML</button>
                     <button class="source-tab" onclick="showSourceTab('css')">CSS</button>
                 </div>
-                <div id="html-source">
-                    <pre><code id="html-code"></code></pre>
+                <div id="html-source" style="flex: 1; display: flex; flex-direction: column; min-height: 0;">
+                    <pre style="flex: 1; overflow-y: auto;"><code id="html-code"></code></pre>
                 </div>
-                <div id="css-source" style="display: none;">
-                    <pre><code id="css-code"></code></pre>
+                <div id="css-source" style="display: none; flex: 1; flex-direction: column; min-height: 0;">
+                    <pre style="flex: 1; overflow-y: auto;"><code id="css-code"></code></pre>
                 </div>
             </div>
         </div>
