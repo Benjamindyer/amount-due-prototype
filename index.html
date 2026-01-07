@@ -129,16 +129,26 @@
 
         .source-code-panel {
             display: none;
-            margin-top: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
             background: #2d2d2d;
-            border-radius: 4px;
+            border-radius: 0 0 8px 8px;
             padding: 20px;
-            max-height: 600px;
+            max-height: 80vh;
             overflow-y: auto;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
 
         .source-code-panel.active {
             display: block;
+        }
+
+        .source-code-panel .control-panel-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .source-code-panel h3 {
@@ -191,6 +201,10 @@
             padding: 40px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             margin-top: 180px;
+        }
+
+        .invoice-container.has-source-panel {
+            margin-top: 280px;
         }
 
         /* Header */
@@ -820,7 +834,9 @@
                 <label for="toggle-estimated-cis">Estimated CIS</label>
             </div>
             <button class="view-source-btn" onclick="toggleSourceCode()">View Source Code</button>
-            <div class="source-code-panel" id="source-code-panel">
+        </div>
+        <div class="source-code-panel" id="source-code-panel">
+            <div class="control-panel-wrapper">
                 <h3>Source Code for Current Design</h3>
                 <div class="source-tabs">
                     <button class="source-tab active" onclick="showSourceTab('html')">HTML</button>
@@ -1046,9 +1062,13 @@
 
         function toggleSourceCode() {
             const panel = document.getElementById('source-code-panel');
+            const invoiceContainer = document.querySelector('.invoice-container');
             panel.classList.toggle('active');
             if (panel.classList.contains('active')) {
+                invoiceContainer.classList.add('has-source-panel');
                 updateSourceCode();
+            } else {
+                invoiceContainer.classList.remove('has-source-panel');
             }
         }
 
