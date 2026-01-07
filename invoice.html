@@ -1217,17 +1217,21 @@
                     const bgColor = bgColorInput.value;
                     const textColor = textColorInput.value;
                     
-                    dueBox.style.backgroundColor = bgColor;
-                    dueBox.style.color = textColor;
+                    // Apply background color with !important
+                    dueBox.style.setProperty('background-color', bgColor, 'important');
+                    dueBox.style.setProperty('color', textColor, 'important');
                     
-                    // Apply to all text elements inside
-                    dueBox.querySelectorAll('*').forEach(el => {
-                        el.style.color = textColor;
+                    // Apply to all text elements inside with !important
+                    dueBox.querySelectorAll('.due-amount-line, .due-date-info, .due-label, .due-date, .due-amount').forEach(el => {
+                        el.style.setProperty('color', textColor, 'important');
                     });
                     
                     // For Design 2, handle border color
                     if (amountDueSection.classList.contains('design-2')) {
-                        dueBox.style.borderColor = textColor;
+                        dueBox.style.setProperty('border-color', textColor, 'important');
+                    } else {
+                        // For other designs, ensure background is set
+                        dueBox.style.setProperty('background-color', bgColor, 'important');
                     }
                     
                     // Save to localStorage
