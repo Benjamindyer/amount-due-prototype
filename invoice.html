@@ -353,6 +353,12 @@
         }
 
         /* Design 1 - Card Grid with Grouped Sections */
+        .amount-due-section.design-1 .amount-due-content {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
         .amount-due-section.design-1 .amount-due-grid {
             display: flex;
             flex-direction: column;
@@ -372,6 +378,15 @@
 
         .amount-due-section.design-1 .amount-due-group:last-child {
             padding-top: 0;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr) auto;
+            gap: 8px;
+            align-items: end;
+        }
+
+        .amount-due-section.design-1 .amount-due-box {
+            align-self: end;
+            margin: 0;
         }
         
         /* Design 2 - Simple Table Layout */
