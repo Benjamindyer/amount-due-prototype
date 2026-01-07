@@ -110,6 +110,80 @@
             border-color: #3498db;
         }
 
+        .view-source-btn {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .view-source-btn:hover {
+            background: #2980b9;
+        }
+
+        .source-code-panel {
+            display: none;
+            margin-top: 20px;
+            background: #2d2d2d;
+            border-radius: 4px;
+            padding: 20px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .source-code-panel.active {
+            display: block;
+        }
+
+        .source-code-panel h3 {
+            color: #ecf0f1;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .source-code-panel pre {
+            background: #1e1e1e;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 0;
+        }
+
+        .source-code-panel code {
+            color: #d4d4d4;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .source-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .source-tab {
+            padding: 8px 16px;
+            background: #3d3d3d;
+            color: #bdc3c7;
+            border: none;
+            border-radius: 4px 4px 0 0;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .source-tab.active {
+            background: #1e1e1e;
+            color: #ecf0f1;
+        }
+
         .invoice-container {
             max-width: 900px;
             margin: 0 auto;
@@ -745,7 +819,20 @@
                 <input type="checkbox" id="toggle-estimated-cis" checked data-item="estimated-cis">
                 <label for="toggle-estimated-cis">Estimated CIS</label>
             </div>
-        </div>
+            <button class="view-source-btn" onclick="toggleSourceCode()">View Source Code</button>
+            <div class="source-code-panel" id="source-code-panel">
+                <h3>Source Code for Current Design</h3>
+                <div class="source-tabs">
+                    <button class="source-tab active" onclick="showSourceTab('html')">HTML</button>
+                    <button class="source-tab" onclick="showSourceTab('css')">CSS</button>
+                </div>
+                <div id="html-source">
+                    <pre><code id="html-code"></code></pre>
+                </div>
+                <div id="css-source" style="display: none;">
+                    <pre><code id="css-code"></code></pre>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -930,6 +1017,10 @@
                 amountDueSection.classList.remove('design-1', 'design-2', 'design-6', 'design-7');
                 // Add selected design class
                 amountDueSection.classList.add(selectedDesign);
+                // Update source code if panel is open
+                if (document.getElementById('source-code-panel').classList.contains('active')) {
+                    updateSourceCode();
+                }
             });
             
             // Item visibility toggles
@@ -945,9 +1036,116 @@
                             item.classList.add('hidden');
                         }
                     }
+                    // Update source code if panel is open
+                    if (document.getElementById('source-code-panel').classList.contains('active')) {
+                        updateSourceCode();
+                    }
                 });
             });
         });
+
+        function toggleSourceCode() {
+            const panel = document.getElementById('source-code-panel');
+            panel.classList.toggle('active');
+            if (panel.classList.contains('active')) {
+                updateSourceCode();
+            }
+        }
+
+        function showSourceTab(tab) {
+            document.querySelectorAll('.source-tab').forEach(t => t.classList.remove('active'));
+            document.getElementById('html-source').style.display = tab === 'html' ? 'block' : 'none';
+            document.getElementById('css-source').style.display = tab === 'css' ? 'block' : 'none';
+            event.target.classList.add('active');
+        }
+
+        function updateSourceCode() {
+            const amountDueSection = document.querySelector('.amount-due-section');
+            const currentDesign = Array.from(amountDueSection.classList).find(c => c.startsWith('design-'));
+            
+            // Get HTML (clone to avoid modifying original)
+            const sectionClone = amountDueSection.cloneNode(true);
+            // Remove hidden items from clone
+            sectionClone.querySelectorAll('.hidden').forEach(el => el.remove());
+            const htmlContent = sectionClone.outerHTML;
+            
+            // Get CSS for current design
+            const styleSheet = Array.from(document.styleSheets).find(sheet => {
+                try {
+                    return sheet.href && sheet.href.includes('invoice.html') || sheet.ownerNode && sheet.ownerNode.tagName === 'STYLE';
+                } catch(e) {
+                    return false;
+                }
+            });
+            
+            let cssContent = '';
+            if (currentDesign) {
+                // Extract CSS rules for current design
+                const allStyles = document.querySelector('style').textContent;
+                const designRegex = new RegExp(`/\\*\\s*${currentDesign.replace('design-', 'Design ')}[^]*?\\*/[^]*?(?=/\\*|$)`, 'g');
+                const matches = allStyles.match(designRegex);
+                if (matches) {
+                    cssContent = matches[0];
+                } else {
+                    // Fallback: get all rules containing the design class
+                    const lines = allStyles.split('\n');
+                    let inDesignBlock = false;
+                    let designCss = '';
+                    lines.forEach(line => {
+                        if (line.includes(currentDesign)) {
+                            inDesignBlock = true;
+                        }
+                        if (inDesignBlock) {
+                            designCss += line + '\n';
+                            if (line.trim() === '}' && !line.includes(currentDesign)) {
+                                // Check if we're ending a nested block or the design block
+                                const openBraces = (designCss.match(/{/g) || []).length;
+                                const closeBraces = (designCss.match(/}/g) || []).length;
+                                if (closeBraces >= openBraces && !line.includes('/*')) {
+                                    inDesignBlock = false;
+                                }
+                            }
+                        }
+                    });
+                    cssContent = designCss;
+                }
+            }
+            
+            // Format and display
+            document.getElementById('html-code').textContent = formatHTML(htmlContent);
+            document.getElementById('css-code').textContent = cssContent || '/* CSS for ' + currentDesign + ' */\n' + getDesignCSS(currentDesign);
+        }
+
+        function formatHTML(html) {
+            // Simple HTML formatting
+            let formatted = '';
+            let indent = 0;
+            const tab = '  ';
+            html.split(/>\s*</).forEach(node => {
+                if (node.match(/^\/\w/)) indent--;
+                formatted += tab.repeat(indent > 0 ? indent : 0) + '<' + node + '>\n';
+                if (node.match(/^<?\w[^>]*[^\/]$/) && !node.startsWith('input') && !node.startsWith('br')) indent++;
+            });
+            return formatted.substring(1, formatted.length - 2);
+        }
+
+        function getDesignCSS(design) {
+            // Get CSS from style tag
+            const styleTag = document.querySelector('style');
+            const cssText = styleTag.textContent;
+            const designName = design.replace('design-', 'Design ');
+            
+            // Find the design block
+            const startMarker = `/* ${designName}`;
+            const startIndex = cssText.indexOf(startMarker);
+            if (startIndex === -1) return '';
+            
+            // Find the next design or end
+            const nextDesignIndex = cssText.indexOf('/* Design ', startIndex + 1);
+            const endIndex = nextDesignIndex !== -1 ? nextDesignIndex : cssText.length;
+            
+            return cssText.substring(startIndex, endIndex).trim();
+        }
     </script>
 </body>
 </html>
