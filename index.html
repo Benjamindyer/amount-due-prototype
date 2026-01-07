@@ -394,11 +394,8 @@
         }
 
         .amount-due-section.design-2 .amount-due-content {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 15px;
-            align-items: end;
-            padding: 15px;
+            display: block;
+            padding: 12px;
         }
 
         .amount-due-section.design-2 .amount-due-grid {
@@ -413,16 +410,16 @@
         }
 
         .amount-due-section.design-2 .amount-due-group:first-child {
-            padding-bottom: 15px;
+            padding-bottom: 10px;
             border-bottom: 2px solid #d0d0d0;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         .amount-due-section.design-2 .amount-due-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 0;
+            padding: 6px 0;
             background: white;
             border: none;
             border-bottom: 1px solid #f0f0f0;
@@ -430,8 +427,14 @@
             margin: 0;
         }
 
-        .amount-due-section.design-2 .amount-due-item:last-child {
+        .amount-due-section.design-2 .amount-due-group .amount-due-item:last-child {
             border-bottom: none;
+        }
+
+        .amount-due-section.design-2 .amount-due-group:last-child .amount-due-item:last-child {
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
         }
 
         .amount-due-section.design-2 .amount-due-item-label {
@@ -450,13 +453,11 @@
         .amount-due-section.design-2 .amount-due-box {
             margin: 0;
             width: 100%;
-            max-width: 200px;
-            padding: 10px 15px;
+            padding: 8px 12px;
             background: white;
             border: 2px dashed #dc3545;
             border-radius: 4px;
             box-shadow: none;
-            align-self: end;
         }
 
         .amount-due-section.design-2 .amount-due-box .due-label {
@@ -483,9 +484,10 @@
         }
 
         .amount-due-section.design-2 .amount-due-footer {
-            margin: 15px;
-            padding-top: 15px;
+            margin: 12px;
+            padding-top: 12px;
             border-top: 1px solid #e0e0e0;
+            font-size: 11px;
         }
 
         /* Design 3 - Compact Table */
@@ -1058,13 +1060,13 @@
                             <div class="amount-due-item-label">Estimated CIS</div>
                             <div class="amount-due-item-value">£60.00</div>
                         </div>
+                        <div class="amount-due-box">
+                            <div class="due-label">Due</div>
+                            <div class="due-date">14/01/2026</div>
+                            <div class="due-amount">£335.00</div>
+                            <div class="due-date-info">Correct as of 07/01/2026</div>
+                        </div>
                     </div>
-                </div>
-                <div class="amount-due-box">
-                    <div class="due-label">Due</div>
-                    <div class="due-date">14/01/2026</div>
-                    <div class="due-amount">£335.00</div>
-                    <div class="due-date-info">Correct as of 07/01/2026</div>
                 </div>
             </div>
             <div class="amount-due-footer">
