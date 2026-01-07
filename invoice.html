@@ -127,6 +127,69 @@
             background: #2980b9;
         }
 
+        .color-config {
+            margin-top: 15px;
+            padding: 15px;
+            background: #34495e;
+            border-radius: 4px;
+        }
+
+        .color-config h4 {
+            color: #ecf0f1;
+            font-size: 13px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .color-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .color-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .color-input-group label {
+            color: #bdc3c7;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .color-input-wrapper {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .color-input-wrapper input[type="color"] {
+            width: 50px;
+            height: 35px;
+            border: 2px solid #4a5f7f;
+            border-radius: 4px;
+            cursor: pointer;
+            background: none;
+        }
+
+        .color-input-wrapper input[type="text"] {
+            flex: 1;
+            padding: 8px;
+            background: #2c3e50;
+            border: 1px solid #4a5f7f;
+            border-radius: 4px;
+            color: #ecf0f1;
+            font-size: 12px;
+            font-family: monospace;
+        }
+
+        .color-input-wrapper input[type="text"]:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
         .source-code-panel {
             display: none;
             position: fixed;
@@ -856,6 +919,25 @@
             <div class="control-item">
                 <input type="checkbox" id="toggle-estimated-cis" checked data-item="estimated-cis">
                 <label for="toggle-estimated-cis">Estimated CIS</label>
+            </div>
+        </div>
+        <div class="color-config">
+            <h4>Due Box Colors</h4>
+            <div class="color-inputs">
+                <div class="color-input-group">
+                    <label>Background Color</label>
+                    <div class="color-input-wrapper">
+                        <input type="color" id="due-box-bg-color" value="#dc3545">
+                        <input type="text" id="due-box-bg-color-text" value="#dc3545">
+                    </div>
+                </div>
+                <div class="color-input-group">
+                    <label>Text Color</label>
+                    <div class="color-input-wrapper">
+                        <input type="color" id="due-box-text-color" value="#ffffff">
+                        <input type="text" id="due-box-text-color-text" value="#ffffff">
+                    </div>
+                </div>
             </div>
         </div>
         <button class="view-source-btn" onclick="toggleSourceCode()">View Source Code</button>
