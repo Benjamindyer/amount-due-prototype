@@ -418,6 +418,135 @@
             border-top: 1px solid #e0e0e0;
         }
 
+        /* Design 3 - Compact Table */
+        .amount-due-section.design-3 {
+            padding: 0;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .amount-due-section.design-3 .amount-due-content {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 20px;
+            padding: 15px;
+        }
+
+        .amount-due-section.design-3 .amount-due-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .amount-due-section.design-3 .amount-due-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #f5f5f5;
+            border-radius: 0;
+        }
+
+        .amount-due-section.design-3 .amount-due-item:last-child {
+            border-bottom: none;
+        }
+
+        .amount-due-section.design-3 .amount-due-item-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 0;
+            font-weight: 400;
+            flex: 1;
+        }
+
+        .amount-due-section.design-3 .amount-due-item-value {
+            font-size: 13px;
+            font-weight: 600;
+            color: #000;
+            text-align: right;
+            margin-left: 20px;
+        }
+
+        .amount-due-section.design-3 .amount-due-box {
+            margin: 0;
+            align-self: start;
+        }
+
+        .amount-due-section.design-3 .amount-due-footer {
+            margin: 0;
+            padding: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        /* Design 4 - Modern Minimal */
+        .amount-due-section.design-4 {
+            padding: 20px;
+            background: linear-gradient(to bottom, #fafafa 0%, #ffffff 100%);
+            border: 1px solid #e8e8e8;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .amount-due-section.design-4 .amount-due-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .amount-due-section.design-4 .amount-due-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .amount-due-section.design-4 .amount-due-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background: white;
+            border: 1px solid #e8e8e8;
+            border-radius: 6px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+            transition: all 0.2s ease;
+        }
+
+        .amount-due-section.design-4 .amount-due-item:hover {
+            border-color: #d0d0d0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+        }
+
+        .amount-due-section.design-4 .amount-due-item-label {
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 0;
+            font-weight: 500;
+        }
+
+        .amount-due-section.design-4 .amount-due-item-value {
+            font-size: 15px;
+            font-weight: 700;
+            color: #000;
+        }
+
+        .amount-due-section.design-4 .amount-due-box {
+            margin: 0;
+            align-self: center;
+            max-width: 280px;
+            width: 100%;
+        }
+
+        .amount-due-section.design-4 .amount-due-footer {
+            margin: 0;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e8e8e8;
+        }
+
         /* Bank Details */
         .bank-section {
             margin-top: 40px;
@@ -453,6 +582,8 @@
                 <select id="design-select">
                     <option value="design-1">Design 1 - Card Grid</option>
                     <option value="design-2">Design 2 - Simple List</option>
+                    <option value="design-3">Design 3 - Compact Table</option>
+                    <option value="design-4">Design 4 - Modern Minimal</option>
                 </select>
             </div>
             <p>Toggle items to show different configurations for the dev team:</p>
@@ -665,7 +796,7 @@
             designSelect.addEventListener('change', function() {
                 const selectedDesign = this.value;
                 // Remove all design classes
-                amountDueSection.classList.remove('design-1', 'design-2');
+                amountDueSection.classList.remove('design-1', 'design-2', 'design-3', 'design-4');
                 // Add selected design class
                 amountDueSection.classList.add(selectedDesign);
             });
