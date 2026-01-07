@@ -352,7 +352,27 @@
             line-height: 1.5;
         }
 
-        /* Design 1 - Card Grid (Current) - uses default styles above */
+        /* Design 1 - Card Grid with Grouped Sections */
+        .amount-due-section.design-1 .amount-due-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .amount-due-section.design-1 .amount-due-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .amount-due-section.design-1 .amount-due-group:first-child {
+            padding-bottom: 15px;
+            border-bottom: 2px solid #d0d0d0;
+        }
+
+        .amount-due-section.design-1 .amount-due-group:last-child {
+            padding-top: 0;
+        }
         
         /* Design 2 - Simple Table Layout */
         .amount-due-section.design-2 {
@@ -864,33 +884,37 @@
         <div class="amount-due-section design-1">
             <div class="amount-due-content">
                 <div class="amount-due-grid">
-                    <div class="amount-due-item" data-item-id="source-quote">
-                        <div class="amount-due-item-label">Source Quote</div>
-                        <div class="amount-due-item-value">£420.00</div>
+                    <div class="amount-due-group">
+                        <div class="amount-due-item" data-item-id="source-quote">
+                            <div class="amount-due-item-label">Source Quote</div>
+                            <div class="amount-due-item-value">£420.00</div>
+                        </div>
+                        <div class="amount-due-item" data-item-id="this-invoice">
+                            <div class="amount-due-item-label">This invoice</div>
+                            <div class="amount-due-item-value">£420.00</div>
+                        </div>
+                        <div class="amount-due-item" data-item-id="already-invoiced">
+                            <div class="amount-due-item-label">Already invoiced</div>
+                            <div class="amount-due-item-value">£420.00</div>
+                        </div>
+                        <div class="amount-due-item" data-item-id="remaining">
+                            <div class="amount-due-item-label">Remaining</div>
+                            <div class="amount-due-item-value">-£420.00</div>
+                        </div>
                     </div>
-                    <div class="amount-due-item" data-item-id="this-invoice">
-                        <div class="amount-due-item-label">This invoice</div>
-                        <div class="amount-due-item-value">£420.00</div>
-                    </div>
-                    <div class="amount-due-item" data-item-id="invoice-less-credits">
-                        <div class="amount-due-item-label">Invoice less credits</div>
-                        <div class="amount-due-item-value">£400.00</div>
-                    </div>
-                    <div class="amount-due-item" data-item-id="already-invoiced">
-                        <div class="amount-due-item-label">Already invoiced</div>
-                        <div class="amount-due-item-value">£420.00</div>
-                    </div>
-                    <div class="amount-due-item" data-item-id="remaining">
-                        <div class="amount-due-item-label">Remaining</div>
-                        <div class="amount-due-item-value">-£420.00</div>
-                    </div>
-                    <div class="amount-due-item" data-item-id="payments-less-refunds">
-                        <div class="amount-due-item-label">Payments less refunds</div>
-                        <div class="amount-due-item-value">£65.00</div>
-                    </div>
-                    <div class="amount-due-item" data-item-id="estimated-cis">
-                        <div class="amount-due-item-label">Estimated CIS</div>
-                        <div class="amount-due-item-value">£60.00</div>
+                    <div class="amount-due-group">
+                        <div class="amount-due-item" data-item-id="invoice-less-credits">
+                            <div class="amount-due-item-label">Invoice less credits</div>
+                            <div class="amount-due-item-value">£400.00</div>
+                        </div>
+                        <div class="amount-due-item" data-item-id="payments-less-refunds">
+                            <div class="amount-due-item-label">Payments less refunds</div>
+                            <div class="amount-due-item-value">£65.00</div>
+                        </div>
+                        <div class="amount-due-item" data-item-id="estimated-cis">
+                            <div class="amount-due-item-label">Estimated CIS</div>
+                            <div class="amount-due-item-value">£60.00</div>
+                        </div>
                     </div>
                 </div>
                 <div class="amount-due-box">
