@@ -501,82 +501,6 @@
             font-size: 11px;
         }
 
-        /* Design 3 - Compact Table */
-        .amount-due-section.design-3 {
-            padding: 0;
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-
-        .amount-due-section.design-3 .amount-due-content {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 20px;
-            padding: 15px;
-            align-items: end;
-        }
-
-        .amount-due-section.design-3 .amount-due-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .amount-due-section.design-3 .amount-due-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0;
-        }
-
-        .amount-due-section.design-3 .amount-due-group:first-child {
-            padding-bottom: 15px;
-            border-bottom: 2px solid #d0d0d0;
-        }
-
-        .amount-due-section.design-3 .amount-due-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 12px;
-            background: transparent;
-            border: none;
-            border-bottom: 1px solid #f5f5f5;
-            border-radius: 0;
-        }
-
-        .amount-due-section.design-3 .amount-due-group .amount-due-item:last-child {
-            border-bottom: none;
-        }
-
-        .amount-due-section.design-3 .amount-due-item-label {
-            font-size: 12px;
-            color: #666;
-            margin-bottom: 0;
-            font-weight: 400;
-            flex: 1;
-        }
-
-        .amount-due-section.design-3 .amount-due-item-value {
-            font-size: 13px;
-            font-weight: 600;
-            color: #000;
-            text-align: right;
-            margin-left: 20px;
-        }
-
-        .amount-due-section.design-3 .amount-due-box {
-            margin: 0;
-            align-self: end;
-        }
-
-        .amount-due-section.design-3 .amount-due-footer {
-            margin: 0;
-            padding: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #e0e0e0;
-        }
-
         /* Design 4 - Clean Two Column */
         .amount-due-section.design-4 {
             padding: 15px;
@@ -890,7 +814,6 @@
                 <select id="design-select">
                     <option value="design-1">Design 1 - Card Grid</option>
                     <option value="design-2">Design 2 - Simple List</option>
-                    <option value="design-3">Design 3 - Compact Table</option>
                     <option value="design-4">Design 4 - Clean Two Column</option>
                     <option value="design-5">Design 5 - Horizontal Summary</option>
                     <option value="design-6">Design 6 - Minimal Compact</option>
@@ -1108,7 +1031,7 @@
             designSelect.addEventListener('change', function() {
                 const selectedDesign = this.value;
                 // Remove all design classes
-                amountDueSection.classList.remove('design-1', 'design-2', 'design-3', 'design-4', 'design-5', 'design-6');
+                amountDueSection.classList.remove('design-1', 'design-2', 'design-4', 'design-5', 'design-6');
                 // Add selected design class
                 amountDueSection.classList.add(selectedDesign);
             });
