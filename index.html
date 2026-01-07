@@ -354,9 +354,10 @@
 
         /* Design 1 - Card Grid with Grouped Sections */
         .amount-due-section.design-1 .amount-due-content {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: 1fr auto;
             gap: 15px;
+            align-items: end;
         }
 
         .amount-due-section.design-1 .amount-due-grid {
@@ -378,15 +379,10 @@
 
         .amount-due-section.design-1 .amount-due-group:last-child {
             padding-top: 0;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr) auto;
-            gap: 8px;
-            align-items: end;
         }
 
         .amount-due-section.design-1 .amount-due-box {
             align-self: end;
-            margin: 0;
         }
         
         /* Design 2 - Simple Table Layout */
@@ -930,13 +926,13 @@
                             <div class="amount-due-item-label">Estimated CIS</div>
                             <div class="amount-due-item-value">£60.00</div>
                         </div>
-                        <div class="amount-due-box">
-                            <div class="due-label">Due</div>
-                            <div class="due-date">14/01/2026</div>
-                            <div class="due-amount">£335.00</div>
-                            <div class="due-date-info">Correct as of 07/01/2026</div>
-                        </div>
                     </div>
+                </div>
+                <div class="amount-due-box">
+                    <div class="due-label">Due</div>
+                    <div class="due-date">14/01/2026</div>
+                    <div class="due-amount">£335.00</div>
+                    <div class="due-date-info">Correct as of 07/01/2026</div>
                 </div>
             </div>
             <div class="amount-due-footer">
