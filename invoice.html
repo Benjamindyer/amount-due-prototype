@@ -379,10 +379,40 @@
 
         .amount-due-section.design-1 .amount-due-group:last-child {
             padding-top: 0;
+            grid-template-columns: repeat(2, 1fr);
         }
 
         .amount-due-section.design-1 .amount-due-box {
-            align-self: end;
+            align-self: stretch;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 8px;
+            min-height: 100%;
+            height: 100%;
+        }
+
+        .amount-due-section.design-1 .amount-due-box .due-label {
+            font-size: 8px;
+            margin-bottom: 2px;
+            line-height: 1.2;
+        }
+
+        .amount-due-section.design-1 .amount-due-box .due-date {
+            font-size: 9px;
+            margin-bottom: 4px;
+            line-height: 1.2;
+        }
+
+        .amount-due-section.design-1 .amount-due-box .due-amount {
+            font-size: 16px;
+            margin-bottom: 2px;
+            line-height: 1.2;
+        }
+
+        .amount-due-section.design-1 .amount-due-box .due-date-info {
+            font-size: 8px;
+            line-height: 1.2;
         }
         
         /* Design 2 - Simple Table Layout */
