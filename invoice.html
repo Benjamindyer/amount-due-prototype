@@ -13,19 +13,28 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            padding: 40px;
+            padding: 0;
             background: #f5f5f5;
             color: #000;
         }
 
         /* Control Panel - Dev Tool */
         .control-panel {
-            max-width: 900px;
-            margin: 0 auto 30px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            max-width: 100%;
             background: #2c3e50;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            padding: 15px 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            border-radius: 0 0 8px 8px;
+        }
+
+        .control-panel-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
         }
 
         .control-panel h2 {
@@ -76,6 +85,7 @@
             background: white;
             padding: 40px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-top: 180px;
         }
 
         /* Header */
@@ -339,9 +349,10 @@
 <body>
     <!-- Control Panel - Dev Tool -->
     <div class="control-panel">
-        <h2>Amount Due Box Configuration</h2>
-        <p>Toggle items to show different configurations for the dev team:</p>
-        <div class="control-grid">
+        <div class="control-panel-wrapper">
+            <h2>Amount Due Box Configuration</h2>
+            <p>Toggle items to show different configurations for the dev team:</p>
+            <div class="control-grid">
             <div class="control-item">
                 <input type="checkbox" id="toggle-source-quote" checked data-item="source-quote">
                 <label for="toggle-source-quote">Source Quote</label>
@@ -370,6 +381,7 @@
                 <input type="checkbox" id="toggle-estimated-cis" checked data-item="estimated-cis">
                 <label for="toggle-estimated-cis">Estimated CIS</label>
             </div>
+        </div>
         </div>
     </div>
 
