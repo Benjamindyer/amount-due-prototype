@@ -394,19 +394,35 @@
         }
 
         .amount-due-section.design-2 .amount-due-content {
-            display: block;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 15px;
+            align-items: end;
+            padding: 15px;
         }
 
         .amount-due-section.design-2 .amount-due-grid {
-            display: block;
-            border-collapse: collapse;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .amount-due-section.design-2 .amount-due-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .amount-due-section.design-2 .amount-due-group:first-child {
+            padding-bottom: 15px;
+            border-bottom: 2px solid #d0d0d0;
+            margin-bottom: 15px;
         }
 
         .amount-due-section.design-2 .amount-due-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 15px;
+            padding: 10px 0;
             background: white;
             border: none;
             border-bottom: 1px solid #f0f0f0;
@@ -431,21 +447,16 @@
             color: #000;
         }
 
-        .amount-due-section.design-2 .amount-due-content {
-            padding: 15px;
-        }
-
         .amount-due-section.design-2 .amount-due-box {
-            margin-top: 15px;
+            margin: 0;
             width: 100%;
-            max-width: none;
-            margin-left: 0;
-            margin-right: 0;
+            max-width: 200px;
             padding: 10px 15px;
             background: white;
             border: 2px dashed #dc3545;
             border-radius: 4px;
             box-shadow: none;
+            align-self: end;
         }
 
         .amount-due-section.design-2 .amount-due-box .due-label {
@@ -490,12 +501,24 @@
             grid-template-columns: 1fr auto;
             gap: 20px;
             padding: 15px;
+            align-items: end;
         }
 
         .amount-due-section.design-3 .amount-due-grid {
             display: flex;
             flex-direction: column;
+            gap: 15px;
+        }
+
+        .amount-due-section.design-3 .amount-due-group {
+            display: flex;
+            flex-direction: column;
             gap: 0;
+        }
+
+        .amount-due-section.design-3 .amount-due-group:first-child {
+            padding-bottom: 15px;
+            border-bottom: 2px solid #d0d0d0;
         }
 
         .amount-due-section.design-3 .amount-due-item {
@@ -509,7 +532,7 @@
             border-radius: 0;
         }
 
-        .amount-due-section.design-3 .amount-due-item:last-child {
+        .amount-due-section.design-3 .amount-due-group .amount-due-item:last-child {
             border-bottom: none;
         }
 
@@ -531,7 +554,7 @@
 
         .amount-due-section.design-3 .amount-due-box {
             margin: 0;
-            align-self: start;
+            align-self: end;
         }
 
         .amount-due-section.design-3 .amount-due-footer {
@@ -553,13 +576,24 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
-            align-items: start;
+            align-items: end;
         }
 
         .amount-due-section.design-4 .amount-due-grid {
             display: flex;
             flex-direction: column;
+            gap: 15px;
+        }
+
+        .amount-due-section.design-4 .amount-due-group {
+            display: flex;
+            flex-direction: column;
             gap: 0;
+        }
+
+        .amount-due-section.design-4 .amount-due-group:first-child {
+            padding-bottom: 15px;
+            border-bottom: 2px solid #d0d0d0;
         }
 
         .amount-due-section.design-4 .amount-due-item {
@@ -573,7 +607,7 @@
             border-radius: 0;
         }
 
-        .amount-due-section.design-4 .amount-due-item:last-child {
+        .amount-due-section.design-4 .amount-due-group .amount-due-item:last-child {
             border-bottom: none;
         }
 
@@ -619,10 +653,20 @@
 
         .amount-due-section.design-5 .amount-due-grid {
             display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 12px;
+        }
+
+        .amount-due-section.design-5 .amount-due-group {
+            display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            padding: 12px;
-            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .amount-due-section.design-5 .amount-due-group:first-child {
+            padding-bottom: 12px;
+            border-bottom: 2px solid #d0d0d0;
         }
 
         .amount-due-section.design-5 .amount-due-item {
@@ -711,6 +755,93 @@
             background: #fafafa;
         }
 
+        /* Design 6 - Minimal Compact */
+        .amount-due-section.design-6 {
+            padding: 10px;
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+        }
+
+        .amount-due-section.design-6 .amount-due-content {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 12px;
+            align-items: end;
+        }
+
+        .amount-due-section.design-6 .amount-due-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .amount-due-section.design-6 .amount-due-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px;
+        }
+
+        .amount-due-section.design-6 .amount-due-group:first-child {
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e0e0e0;
+            margin-bottom: 8px;
+        }
+
+        .amount-due-section.design-6 .amount-due-item {
+            padding: 6px 8px;
+            background: #f8f9fa;
+            border-radius: 2px;
+            border: 1px solid #e8e8e8;
+        }
+
+        .amount-due-section.design-6 .amount-due-item-label {
+            font-size: 10px;
+            color: #666;
+            margin-bottom: 2px;
+            font-weight: 500;
+        }
+
+        .amount-due-section.design-6 .amount-due-item-value {
+            font-size: 12px;
+            font-weight: 600;
+            color: #000;
+        }
+
+        .amount-due-section.design-6 .amount-due-box {
+            margin: 0;
+            padding: 8px 12px;
+            min-width: 140px;
+        }
+
+        .amount-due-section.design-6 .amount-due-box .due-label {
+            font-size: 9px;
+            margin-bottom: 3px;
+        }
+
+        .amount-due-section.design-6 .amount-due-box .due-date {
+            font-size: 9px;
+            margin-bottom: 4px;
+        }
+
+        .amount-due-section.design-6 .amount-due-box .due-amount {
+            font-size: 18px;
+            margin-bottom: 3px;
+        }
+
+        .amount-due-section.design-6 .amount-due-box .due-date-info {
+            font-size: 8px;
+        }
+
+        .amount-due-section.design-6 .amount-due-footer {
+            margin: 0;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid #e8e8e8;
+            font-size: 10px;
+            line-height: 1.4;
+        }
+
         /* Bank Details */
         .bank-section {
             margin-top: 40px;
@@ -749,6 +880,7 @@
                     <option value="design-3">Design 3 - Compact Table</option>
                     <option value="design-4">Design 4 - Clean Two Column</option>
                     <option value="design-5">Design 5 - Horizontal Summary</option>
+                    <option value="design-6">Design 6 - Minimal Compact</option>
                 </select>
             </div>
             <p>Toggle items to show different configurations for the dev team:</p>
@@ -965,7 +1097,7 @@
             designSelect.addEventListener('change', function() {
                 const selectedDesign = this.value;
                 // Remove all design classes
-                amountDueSection.classList.remove('design-1', 'design-2', 'design-3', 'design-4', 'design-5');
+                amountDueSection.classList.remove('design-1', 'design-2', 'design-3', 'design-4', 'design-5', 'design-6');
                 // Add selected design class
                 amountDueSection.classList.add(selectedDesign);
             });
