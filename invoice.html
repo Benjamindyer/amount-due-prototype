@@ -30,6 +30,43 @@
             padding: 15px 20px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
             border-radius: 0 0 8px 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .control-panel.collapsed {
+            transform: translateY(calc(-100% + 50px));
+        }
+
+        .control-panel-toggle {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2c3e50;
+            color: #ecf0f1;
+            border: none;
+            border-radius: 0 0 8px 8px;
+            padding: 8px 20px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 1001;
+        }
+
+        .control-panel-toggle:hover {
+            background: #34495e;
+        }
+
+        .control-panel-content {
+            transition: opacity 0.3s ease, max-height 0.3s ease;
+            overflow: hidden;
+        }
+
+        .control-panel.collapsed .control-panel-content {
+            opacity: 0;
+            max-height: 0;
+            pointer-events: none;
         }
 
         .control-panel-wrapper {
@@ -288,6 +325,11 @@
             padding: 40px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             margin-top: 180px;
+            transition: margin-top 0.3s ease;
+        }
+
+        .control-panel.collapsed ~ .invoice-container {
+            margin-top: 90px;
         }
 
         .invoice-container.has-source-panel {
@@ -878,7 +920,9 @@
 </head>
 <body>
     <!-- Control Panel - Dev Tool -->
-    <div class="control-panel">
+    <div class="control-panel" id="control-panel">
+        <button class="control-panel-toggle" onclick="toggleControlPanel()">Show/Hide Configuration</button>
+        <div class="control-panel-content">
         <div class="control-panel-wrapper">
             <h2>Amount Due Box Configuration</h2>
             <div class="design-selector">
@@ -941,6 +985,7 @@
             </div>
         </div>
         <button class="view-source-btn" onclick="toggleSourceCode()">View Source Code</button>
+        </div>
         </div>
         <div class="source-code-panel" id="source-code-panel">
             <div class="control-panel-wrapper">
@@ -1255,7 +1300,20 @@
             
             // Load colors on page load
             loadColors();
+            
+            // Load control panel state
+            const isCollapsed = localStorage.getItem('controlPanelCollapsed') === 'true';
+            if (isCollapsed) {
+                document.getElementById('control-panel').classList.add('collapsed');
+            }
         });
+
+        function toggleControlPanel() {
+            const panel = document.getElementById('control-panel');
+            panel.classList.toggle('collapsed');
+            const isCollapsed = panel.classList.contains('collapsed');
+            localStorage.setItem('controlPanelCollapsed', isCollapsed);
+        }
 
         function toggleSourceCode() {
             const panel = document.getElementById('source-code-panel');
